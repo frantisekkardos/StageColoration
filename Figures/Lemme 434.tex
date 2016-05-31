@@ -1,0 +1,79 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\newtheorem{definition}{Définition}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}{Proposition}
+\newtheorem{exemple}{Exemple}
+\newtheorem{lemme}{Lemme}
+
+
+\newcommand{\ep}{{\hfill $\square$}}
+
+\addtolength{\parskip}{5pt}
+
+\begin{document}
+
+Soit $G$ un graphe avec les arêtes coloriées. 
+Considérons le sous-graphe $H^{c_1,c_2}$ de $G$ induit par les arêtes coloriés $c_1$ et $c_2$. Par la définition d'une coloration, aucun sommet de $H^{c_1,c_2}$ ne peut avoir un degré supérieur à 2. Par conséquent, toute composante connexe de $H^{c_1,c_2}$ est une chaîne ou un cycle. Si on choisit une composante connexe $C$ de $H^{c_1,c_2}$, qu'on échange les couleurs $c_1$ et $c_2$ le long de $C$ et qu'on garde la couleur de toutes les autres arêtes, on obtiendra une autre coloration de $G$.
+
+Étant donné une arête $e$ de $G$ de couleur $c$ et une autre couleur $c'$, il existe une et une seule composante connexe de $H^{c,c'}$ contenant $e$.
+Nous allons appeler celle-là la \emph{$(c,c_1)$-chaîne de Kempe} de $e$. 
+
+
+
+
+\begin{lemme}
+Soit $v$ un sommet de $G$ tel que $d(v) = 3$. Alors, pour tout voisin $u$ de $v$ on a $4\le d(u) \le 5$.
+\end{lemme}
+
+Preuve. De la même manière que la démonstration du lemme précédent, si $v$ avait un voisin $u$ de degré (au plus) 3, l'arête $uv$ serait adjacente à (au plus) quatre autres arêtes, alors, n'importe quelle coloration de $G\setminus uv$ donnerait une coloration de $G$, l'absurde.
+
+\begin{lemme}
+Soit $v$ un sommet de $G$ tel que $d(v) = 3$. Alors, il existe au moins deux sommets $u_1$, $u_2 \in N(v)$ tell que $d(u_1) = d(u_2)= 5$.
+\end{lemme}
+
+Preuve.
+Supposons, par l'absurde, qu'il n'existe que $u_1 \in N(v)$ tel que $4\le d(u_1) \le 5$ et pour $ u_2$, $u_3 \in N(v)$ on a $d(u_2) = d(u_3) = 4$. 
+
+Soit $e_i=vu_i$, $i=1,2,3$ ; soit $\{e_i,e_{i1},e_{i2},e_{i3}\}$ l'ensemble des arêtes incidentes à $u_i$, $i=2,3$. 
+Considérons une coloration $\varphi$ du sous-graphe $G' = G \setminus e_3$. Afin que celle-ci ne s'étende pas en une coloration de $G$, on peut supposer, sans perdre de la généralité, que $\varphi(e_1) = 1$, $\varphi(e_2) = 2$, $\varphi(e_{31}) = 3$, $\varphi(e_{32}) = 4$ et $\varphi(e_{33}) = 5$.
+
+Si les $(2,3)$-chaînes de Kempe des arêtes $e_2$ et $e_{31}$ sont distinctes, alors en alternant les couleurs d'une parmi elles on obtiendrait une coloration de $G'$ dans laquelle les arêtes adjacentes à $e_3$ ne seraient pas coloriées de cinq couleurs différentes, ce qui est absurde.
+Donc, il existe une $(2,3)$-chaîne de Kempe reliant $e_2$ et $e_{31}$ ; il y a ainsi une arête incident à $u_2$ coloriée 3, disons que $\varphi(e_{21})=3$. Voir Figure \ref{fig:434} pour illustration.
+
+Similairement, il existe une $(2,4)$-chaîne (une $(2,5)$-chaîne) reliant $e_2$ et $e_{32}$ ($e_2$ et $e_{33}$, respectivement). Par ailleurs, il n'y a pas d'arête coloriée 1 incidente à $u_2$.
+
+Considérons maintenant les $(1,3)$-chaînes de Kempe. Par le même argument, la chaîne qui commence par $e_1$ se termine forcément par $e_{31}$. Donc, on est libre à alterner la chaîne de Kempe de $e_{21}$, recolorier $\varphi(e_2)=3$ et poser  
+$\varphi(e_3)=2$, créant ainsi une coloration de $G$, une contradiction. 
+\ep 
+    
+\begin{figure}[ht]
+\centerline{
+\begin{tabular}{ccc}
+\begin{tabular}{c}
+\includegraphics[scale=1]{434.1}
+\end{tabular}
+&
+$\longrightarrow$
+&
+\begin{tabular}{c}
+\includegraphics[scale=1]{434.2}
+\end{tabular}
+\end{tabular}
+}
+\caption{Un sommet de degré trois avec deux voisins de degré quatre constitue une configuration réductible. }
+\label{fig:434}
+\end{figure}
+
+
+\end{document}
+

@@ -14,17 +14,29 @@
 \newtheorem{proposition}{Proposition}
 \newtheorem{exemple}{Exemple}
 \newtheorem{lemme}{Lemme}
+\newtheorem{conjecture}{Conjecture}
 
 
 \newcommand{\ep}{{\hfill $\square$}}
 
-\title{Coloration Des Arêtes Des Graphes Planaires}
-\author{Antonio Gallastegui \and Franti\v sek Kardo\v s}
+\title{Coloration des Arêtes des Graphes Planaires}
+\author{Antonio Gallastegui
+ }
+ \date{
+ Mémoire de Master 2 MIMSE \\
+  Modélisation, Ingénierie Mathématique, Statistique et Économique \\
+  spécialité Recherche Opérationnelle et Aide à la Décision \\\bigskip
+  stage de recherche au LaBRI\\
+  Laboratoire Bordelais de Recherche en Informatique \\
+  responsable de stage : Franti\v sek Kardo\v s  \\
+  thème : Graphes et optimisation \\
+  équipe : Combinatoire et algorithmique  \\
+ }
 \addtolength{\parskip}{5pt}
 
 \begin{document}
+\thispagestyle{empty}
 \maketitle
-\newpage
 
 \section{Introduction}
 La Théorie des Graphes est un domaine des mathématiques (discrètes) qui se remonte au XVIIIème siècle et le célèbre problème des ponts de Könisberg (Kaliningrad). Ce problème consiste à essayer de construire un promenade qui commence et finit au même point, tout en parcourant les 7 ponts qu'il y a dans la ville une seule fois. C'est un domaine très étendue et appliqué parmi des autres sciences. Le problème traité s'agit d'un problème de la théorie de graphes, plus concrètement, il s'agit d'un problème de coloration de graphes.  La coloration de graphes se classifie comme des problèmes d'affectation où on affecte différents sommets ou taches avec différents couleurs. 
@@ -36,7 +48,6 @@ D'abord, on va présenter les bases, définitions, théorèmes et exemples pour 
 Une fois tous les aspects techniques de la théorie de graphes soient bien expliqués, il faudra mentionner aussi le théorème de 4 couleurs, un ancien problème très connus qui se soutient en la réductibilité aussi et duquel on s'est inspiré pour aborder notre problème. On va analyser la façon de traiter les graphes et la technique de réduction de ce problème pour essayer de trouver une moyenne de réduire nos graphes.
 
 Ensuite on passe donc, à décrire les aspects techniques mentionnés ainsi que les différentes méthodes qui seront utilisées.
-\newpage
 
 \section{Présentation de Sujet}
 
@@ -61,9 +72,9 @@ Deux arêtes $e,e'\in E(G)$ sont \emph{adjacentes} si $e=uv$ et $e'=uv'$ pour $u
 Le \emph{degré} $d_{G}(v)$ d'un sommet $v$ d'un graphe $G$ est le nombre de voisins de $v$. Le degré maximum d'un graphe $G$ (le maximum des degrés de ses sommets) est noté $\Delta(G)$ et le degré min $\delta(G)$.
 \end{definition}
 
-\begin{definition}
-Soit G un graphe  
-\end{definition}
+%\begin{definition}
+%Soit G un graphe  
+%\end{definition}
 
 \begin{definition}
 Soit $G=(V,E)$ un graphe. On dit que $G$ est un graphe \emph{planaire} si et seulement s'il peut être dessiné sur le plan sans croisement des arêtes. 
@@ -90,40 +101,24 @@ $$
 \label{fig:ex}
 \end{figure}
 
-\begin{exemple}
-Le graphe de Figure \ref{fig:ex} il a $n=7$ sommets, $m=10$ arêtes et $f=5$ faces. En effet, $7 - 10 + 5 = 2$.
-\end{exemple}
+Par exemple, le graphe de Figure \ref{fig:ex} il a $n=7$ sommets, $m=10$ arêtes et $f=5$ faces. En effet, $7 - 10 + 5 = 2$.
 
-
-\begin{proposition}
-Un graphe $G$ planaire, à $n \geq 3$ sommets, a au plus $3n - 6$ arêtes.
-\end{proposition}
+Il est facile de déduire de la formule d'Euler l'énoncé suivant.
 
 \begin{proposition}
 Tout graphe planaire contient un sommet de degré au plus 5.
 \end{proposition}
 
+
+Si un graphe planaire a une face de taille supérieur à 3, on peut insérer une arête (une diagonale de la face) afin de la diviser en deux faces de moindre taille. Un graphe planaire obtenu en appliquant cette opération tant que possible n'a que des faces triangulaires, il est appelé ainsi une \emph{triangulation}. Étant donné un graphe planaire $G$, quelque soit la façon d'ajouter des arêtes, toute triangulation obtenu à partir de $G$ a le même nombre d'arêtes :
+
+\begin{proposition}
+Un graphe $G$ planaire, à $n \geq 3$ sommets, a au plus $3n - 6$ arêtes.
+\end{proposition}
+
 \begin{definition}
 La \emph{maille (girth)} $g(G)$ d'un graphe $G$ est la longueur d'un plus petit cycle dans $G$, s'il en existe un. Sinon, $g(G)$ est infinie. %(Les arbres ont des mailles infinies).
 \end{definition}
-
-
-Theorem de Vizing : delta + 1 couleurs 
-
-Question principale : pour quelles classes de graphes $\Delta$ couleurs suffisent ?
-
-Il est connu que pour les graphes planaires avec $\Delta\ge 7$ c'est ok.
-
-\begin{proposition}
-Soit $G$ un graphe planaire de degré maximum 4 et maille 5. Alors $\chi'(G)=4$.
-\end{proposition}
-
-Preuve. jqsirlt qlsmdfjh ljqsfd \ep
-
-\begin{proposition}
-Soit $G$ un graphe planaire de degré maximum 5 et maille 4. Alors $\chi'(G)=5$.
-\end{proposition}
-
 
 \subsection{Coloration de Graphes}
 La coloration de graphes est un domaine central dans la théorie de graphes. 
@@ -132,33 +127,27 @@ Nous présentons ainsi les définitions et quelques propriétés des colorations
 
 
 \begin{definition}%[Coloration propre]
-Une \emph{coloration propre} d'un graphe $G$ est une application $\varphi: V(G) \to C$, où $C=\{1,2,3,...,k\}$ est un ensemble d'entiers (ou \emph{couleurs}), telle que pour tout arête $uv \in E(G)$, on a $\varphi(u) \neq \varphi(v)$.
+Une \emph{coloration propre} d'un graphe $G$ est une application $\varphi: V(G) \to C$, où $C=\{1,2,3,\dots,k\}$ est un ensemble d'entiers (de \emph{couleurs}), telle que pour tout arête $uv \in E(G)$, on a $\varphi(u) \neq \varphi(v)$. 
 
-Un graphe $G$ est dit $k$-coloriable si on peut le colorier à $k$ couleurs, c-à-d si l'ensemble $C$ de couleurs est de taille $k$.
+Un graphe $G$ est dit \emph{$k$-coloriable} si on peut le colorier à $k$ couleurs, c-à-d si l'ensemble $C$ de couleurs est de taille $k$. 
+
+Le \emph{nombre chromatique} $\chi(G)$ d'un graphe $G$, est le plus petit entier $k$ tel que $G$ est $k$-coloriable. Si $\chi(G) = k$, alors on dit que le graphe G est \emph{$k$-chromatique}. Cela signifie donc que $G$ est $k$-coloriable mais  pas $(k-1)$-coloriable.
 \end{definition}
 
-\begin{exemple}
-.... graphe et colorations
-\end{exemple}
-
-\begin{definition}%[Nombre Chromatique]
-Le \emph{nombre chromatique} $\chi(G)$ d'un graphe $G$, est le plus petit entier $k$ tel que $G$ est $k$-coloriable. $\chi(G) = k$, alors on dit que le graphe G est \emph{$k$-chromatique}. Cela signifie donc que $G$ est $k$-coloriable mais  pas $(k-1)$-coloriable.
-\end{definition}
-
-\begin{exemple}
-.... graphe et colorations
-\end{exemple}
+%\begin{exemple}
+%.... graphe et colorations
+%\end{exemple}
 
 %\begin{definition}
 %Le problème de $k$-coloration est un problème de décision, qui vérifie si un graphe peut être colorié avec $k$ couleurs différentes. Soit donc, un graphe $G$ et un entier $k$ et on se demande si le graphe $G$ est $k$-coloriable.
 %\end{definition}
 
-Le problème de $k$-coloration (le problème de décider si un graphe donné est $k$-coloriable) est \emph{NP-Complet} pour tout $k \geq 3$. Pour $k = 1$ le graphe $G$ est $1$-coloriable si et seulement si le graphe ne contient pas d'arêtes. Puis pour $k =  2$ on revient sur la question de tester si un graphe $G$ est biparti (ce qui est le cas si et seulement si il ne contient aucun cycle impair). 
+Le problème de $k$-coloration (le problème de décider si un graphe donné est $k$-coloriable) est NP-complet pour tout $k \geq 3$ {\color{blue}[citation!]}. Pour $k = 1$, un graphe $G$ est $1$-coloriable si et seulement si $G$ ne contient pas d'arêtes. Puis, pour $k =  2$, on revient sur la question de tester si un graphe $G$ est biparti (ce qui est le cas si et seulement si il ne contient aucun cycle impair). 
 
-Dans le domaine de la coloration de graphes il existe plusieurs types de colorations et même si la coloration propre est la plus connue ou la plus utilisée, dans notre problème on va s'intéresser à la coloration d'arêtes.
+Dans le domaine de la coloration de graphes il existe plusieurs types de colorations et même si la coloration propre est la plus connue ou la plus utilisée, dans notre problème on va s'intéresser à la coloration d'arêtes également.
 
 \begin{definition}%[Coloration d'arêtes]
-Une \emph{coloration d'arêtes} d'un graphe $G$ est une application $\varphi: E(G) \to C$, où $C=\{1,2,3,...,k\}$ est un ensemble d'entiers (ou \emph{couleurs}), telle que pour tout paire $e, e' \in E(G)$ d'arêtes adjacentes on a $\varphi(e) \neq \varphi(e')$.
+Une \emph{coloration d'arêtes} d'un graphe $G$ est une application $\varphi: E(G) \to C$, où $C=\{1,2,3,\dots,k\}$ est un ensemble d'entiers (de \emph{couleurs}), telle que pour tout paire $e, e' \in E(G)$ d'arêtes adjacentes on a $\varphi(e) \neq \varphi(e')$.
 
 L'\emph{indice chromatique} $\chi'(G)$ d'un graphe $G$ est le nombre de couleurs minimum qu'on nécessite pour colorier les arêtes de $G$.
 \end{definition}
@@ -169,19 +158,18 @@ Soit $G$ un graphe. Alors, $\chi'(G) = \Delta(G)$ ou $\chi'(G) = \Delta(G) + 1$.
 
 La question de déterminer/caractériser les classes de graphes pour lesquelles on a $\chi'(G) = \Delta(G)$ (on les appelle aussi les graphes de classe 1) reste une question centrale. Il existe des résultats dans cette direction pour les graphes planaires.
 
-C'est Vizing \cite{Vizing} qui a montré que les graphes planaires avec $\Delta(G)\ge 8$ sont des graphes de classe 1. Plus tard, le cas de $\Delta = 7$ a été aussi prouvé en 2001 par Sanders et Zhao [citation] et indépendamment [trouver l'autre citation]. 
+C'est Vizing \cite{Vizing} qui a montré que les graphes planaires avec $\Delta(G)\ge 8$ sont des graphes de classe 1. Le cas de $\Delta = 7$ a été prouvé en 2001 par Sanders et Zhao [citation]. 
 En revanche, pour $\Delta\le 5$ il existe des graphes planaires avec $\chi'(G)=\Delta(G)+1$ -- il suffit de subdiviser par un sommet de degré 2 une arête d'un graphe $\Delta$-régulier et $\Delta$-arête-coloriable \cite{Vizing2}.
 Le cas $\Delta = 6$ reste largement ouvert. 
 
-Cependant, les graphes planaires avec $\Delta(G)=5$ sans triangles (c-à-d avec $g(G)\ge 4$) sont 5-arête-coloriables, donc classe 1 ; pareil, les graphes planaires avec $\Delta(G) = 4$ et $g(G)\ge 5$ sont $4$-coloriables. Ces deux derniers cas, on les reprouvera dans le chapitre suivant. 
+Cependant, les graphes planaires avec $\Delta(G)=5$ sans triangles (c-à-d avec $g(G)\ge 4$) sont 5-arête-coloriables, donc classe 1 ; pareil, les graphes planaires avec $\Delta(G) = 4$ et $g(G)\ge 5$ sont $4$-coloriables. Ces deux derniers cas, on les reprouvera ci-dessus. Il reste encore une classe de graphe planaire, plus riche que cette dernière, pour laquelle la question est toujours ouverte :
 
-Il est conjecturé que même les graphes planaires avec $\Delta(G) = 4$ et $g(G) \geq 4$ sont 4-arête-coloriables également. C'est précisément cette conjecture-là, $\Delta(G) = 4$, $g(G) \geq 4$ et $\chi'(G) = 4$ le problème à traiter dans cet écrit. 
+\begin{conjecture}
+Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 4$. Alors, $\chi'(G) = 4$. 
+\end{conjecture} 
 
-
-
-
+Cette conjecture est le problème principal à traiter dans cet écrit. 
 %\subsection{Sujet du Problème et Conditions}
-
 Nous allons refaire la démonstration de deux propositions voisines de la conjecture étudiée, afin de pouvoir et illustrer sur deux exemples non-triviaux les méthodes utilisées. Nous introduisons d'abord quelques notions et notation techniques.
 
 Soit $G$ un graphe avec les arêtes coloriées. 
@@ -216,8 +204,8 @@ Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 5$
 \end{lemme}
 
 Preuve.
-Supposons qu'un sommet $v \in V(G)$ tel que $d(v) = 2$ ait un voisin $u \in N(v)$ avec $d(u)  \le 4$. Considérons une 5-arête-coloration de $G' = G \setminus uv$.
-L'arête $uv$ est adjacent à quatre arêtes de $G'$, alors, il existe au moins une couleur $c$ pour colorier l'arête $uv$, donc $G$ aussi est $5$-arête-coloriable,  une contradiction.
+Supposons qu'un sommet $v \in V(G)$ tel que $d_G(v) = 2$ ait un voisin $u \in N(v)$ avec $d_G(u)  \le 4$. Considérons une 5-arête-coloration de $G' = G \setminus uv$.
+L'arête $uv$ est adjacente à quatre arêtes de $G'$, alors, il existe au moins une couleur $c$ pour colorier l'arête $uv$, donc $G$ aussi est $5$-arête-coloriable,  une contradiction.
 \ep
 
 
@@ -236,7 +224,7 @@ Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, au moins deux voisins de $v$ sont 
 \end{lemme}
 
 Preuve.
-Supposons, par l'absurde, qu'il n'existe que $u_1 \in N(v)$ tel que $4\le d_G(u_1) \le 5$ et pour $ u_2$, $u_3 \in N(v)$ on a $d_G(u_2) = d_G(u_3) = 4$. 
+Supposons, par l'absurde, que $N(v)=\{u_1,u_2,u_3\}$, où $4\le d_G(u_1) \le 5$ et  $d_G(u_2) = d_G(u_3) = 4$. 
 
 Soit $e_i=vu_i$, $i=1,2,3$ ; soit $\{e_i,e_{i1},e_{i2},e_{i3}\}$ l'ensemble des arêtes incidentes à $u_i$, $i=2,3$. 
 Considérons une coloration $\varphi$ du sous-graphe $G' = G \setminus e_3$. Afin que celle-ci ne s'étende pas en une coloration de $G$, on peut supposer, sans perdre de la généralité, que $\varphi(e_1) = 1$, $\varphi(e_2) = 2$, $\varphi(e_{31}) = 3$, $\varphi(e_{32}) = 4$ et $\varphi(e_{33}) = 5$.

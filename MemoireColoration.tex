@@ -38,22 +38,40 @@
 \thispagestyle{empty}
 \maketitle
 
-\section{Introduction}
-La Théorie des Graphes est un domaine des mathématiques (discrètes) qui se remonte au XVIIIème siècle et le célèbre problème des ponts de Könisberg (Kaliningrad). Ce problème consiste à essayer de construire un promenade qui commence et finit au même point, tout en parcourant les 7 ponts qu'il y a dans la ville une seule fois. C'est un domaine très étendue et appliqué parmi des autres sciences. Le problème traité s'agit d'un problème de la théorie de graphes, plus concrètement, il s'agit d'un problème de coloration de graphes.  La coloration de graphes se classifie comme des problèmes d'affectation où on affecte différents sommets ou taches avec différents couleurs. 
+\begin{abstract}
+Dans la démonstration du fameux théorème des quatre couleurs, la question principale est traduite en une recherche d'une 3-coloration des arêtes d'un graphes planaire cubique. L'existence d'une telle coloration est démontré en utilisant la méthode de déchargement ; la réductibilité de certaines configurations est démontrée à l'aide d'un ordinateur. En s'inspirant de cette technique, pour attaquer une question ouverte sur la coloration des arêtes des graphes planaires (4-arête-colorabilité des graphes planaires de degré max 4 sans triangles), nous avons conçu et implémenté un programme qui permettra de vérifier la réductibilité de configurations d'une façon automatisée. 
+\end{abstract}
 
-Le problème qu'on présente ensuite c'est un problème de coloration, un problème de la théorie des graphes et on va le définir comme un problème de décision car l'objectif du problème sera de trouver une coloration à 4 couleur pour des graphes spécifiques qu'on définira plus tard. Pour aborder ce problème on a pensé à utiliser les méthodes utilisées dans un autre ancien problème très connu, le théorème de 4 couleurs, donc on va s'inspirer dans la problématique de ce problème pour résoudre notre problème.
+\section*{Introduction}
+La Théorie des Graphes est un domaine des mathématiques discrètes qui remonte au XVIIIème siècle et le célèbre problème des ponts de Könisberg (Kaliningrad). Ce problème consiste à essayer de construire un promenade qui commence et finit au même point, tout en parcourant les 7 ponts qu'il y avait dans la ville à l'époque, chacun une seule fois. C'est un domaine très étendu et appliqué parmi des autres sciences. 
 
-D'abord, on va présenter les bases, définitions, théorèmes et exemples pour bien se placer dans le domaine. On définira qu'est ce que c'est un graphe, un graphe planaire, une coloration, une coloration d'arêtes, un nombre chromatique, le degré d'un sommet etc. Puis on passera sur des définitions plus complexes et plus détaillés comme la réductibilité ou les couplages d'un graphe et finalement on expliquera la méthode de déchargement, lequel on utilisera pour résoudre notre problème. 
+Un des problèmes principaux au sein de la théorie des graphes est le problème de coloration des graphes. Le champ d'applications de la coloration des graphes couvre notamment le problème de l'attribution de fréquences dans les télécommunications, la conception de puces électroniques ou l'allocation de registres en compilation.
 
-Une fois tous les aspects techniques de la théorie de graphes soient bien expliqués, il faudra mentionner aussi le théorème de 4 couleurs, un ancien problème très connus qui se soutient en la réductibilité aussi et duquel on s'est inspiré pour aborder notre problème. On va analyser la façon de traiter les graphes et la technique de réduction de ce problème pour essayer de trouver une moyenne de réduire nos graphes.
+Le problème étudié est un problème de coloration des graphes. Plus particulièrement, il s'agit d'une conjecture disant qu'il est toujours possible  de colorier avec quatre couleurs les arêtes des graphes d'une certaine classe. Pour aborder ce problème on a pensé à utiliser les méthodes utilisées pour résoudre un autre problème de coloration des graphes très connu, le Théorème de quatre couleurs. 
 
-Ensuite on passe donc, à décrire les aspects techniques mentionnés ainsi que les différentes méthodes qui seront utilisées.
+Lé mémoire est structuré de la façon suivante :
+Dans le chapitre \ref{chap:pres}, nous présentons les définitions, les théorèmes et les exemples pour bien se placer dans le domaine. Nous illustrons sur deux exemples d'une complexité non-triviale les deux méthodes principales utilisées aussi dans la preuve du Théorème de quatre couleurs : la réductibilité de configurations et la méthode de déchargement. Le concept de réductibilité est décrit plus détaillé, par ce que c'est pour avancer dans cette démarche qu'on a développer un programme.
+
+Le chapitre \ref{chap:easy} contient ...
+
+Le chapitre \ref{chap:meth} est dédié à la description du programme permettant de vérifier la réductibilité de configurations. ... 
+
+
+etc. 
+à compléter une fois le mémoire tout rempli.
+%Une fois tous les aspects de base de la théorie de graphes soient bien expliqués, il faudra mentionner aussi le théorème de 4 couleurs, un ancien problème très connus qui se soutient en la réductibilité aussi et duquel on s'est inspiré pour aborder notre problème. On va analyser la façon de traiter les graphes et la technique de réduction de ce problème pour essayer de trouver une moyenne de réduire nos graphes.
+
+%Ensuite on passe donc, à décrire les aspects techniques mentionnés ainsi que les différentes méthodes qui seront utilisées.
 
 \section{Présentation de Sujet}
+\label{chap:pres}
 
-Dans cette partie on va, d'abord, un petit rappel des fondamentales de la théorie de graphes ainsi que des explications plus profondes des méthodes et techniques nécessaires pour comprendre le vrai sujet du problème traité. On va quand même, commenter le théorème de 4 couleurs, l'expliquer et faire des ressemblances avec notre problème et finalement on donnera les conditions initiaux et l'objectif du problème à traiter. Cette partie sera donc, consacrée à la mise en place des compétences et à la explication des conditions de sujet.
+Dans cette partie nous faisons, d'abord, un petit rappel des fondamentaux de la théorie des graphes ainsi que des explications plus profondes des méthodes et techniques nécessaires pour bien comprendre le sujet du problème traité. 
+Ensuite, la question principale étudiée est introduite avec son contexte.
+Nous allons, quand même, commenter la démonstration du Théorème de quatre couleurs, l'expliquer et évoquer des ressemblances avec notre problème. 
+%Cette partie sera donc, consacrée à la mise en place des compétences et à la explication des conditions de sujet.
 
-\subsection{Notions Générales de la Théorie de Graphes}
+\subsection{Notions générales de la théorie des graphes}
 
 Dans cette partie nous rappelons quelques notions de la théorie de graphes,  des définitions de base et des concepts qui seront nécessaires pour la suite. 
 
@@ -156,8 +174,9 @@ L'\emph{indice chromatique} $\chi'(G)$ d'un graphe $G$ est le nombre de couleurs
 Soit $G$ un graphe. Alors, $\chi'(G) = \Delta(G)$ ou $\chi'(G) = \Delta(G) + 1$.
 \end{theorem}
 
-La question de déterminer/caractériser les classes de graphes pour lesquelles on a $\chi'(G) = \Delta(G)$ (on les appelle aussi les graphes de classe 1) reste une question centrale. Il existe des résultats dans cette direction pour les graphes planaires.
+La question de déterminer/caractériser les classes de graphes pour lesquelles on a $\chi'(G) = \Delta(G)$ (on les appelle aussi les graphes de classe 1) reste une question centrale. 
 
+Il existe des résultats concernant la classification des graphes de classe 1 pour les graphes planaires.
 C'est Vizing \cite{Vizing} qui a montré que les graphes planaires avec $\Delta(G)\ge 8$ sont des graphes de classe 1. Le cas de $\Delta = 7$ a été prouvé en 2001 par Sanders et Zhao [citation]. 
 En revanche, pour $\Delta\le 5$ il existe des graphes planaires avec $\chi'(G)=\Delta(G)+1$ -- il suffit de subdiviser par un sommet de degré 2 une arête d'un graphe $\Delta$-régulier et $\Delta$-arête-coloriable \cite{Vizing2}.
 Le cas $\Delta = 6$ reste largement ouvert. 
@@ -170,7 +189,11 @@ Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 4$. Alors, $\chi'
 
 Cette conjecture est le problème principal à traiter dans cet écrit. 
 %\subsection{Sujet du Problème et Conditions}
-Nous allons refaire la démonstration de deux propositions voisines de la conjecture étudiée, afin de pouvoir et illustrer sur deux exemples non-triviaux les méthodes utilisées. Nous introduisons d'abord quelques notions et notation techniques.
+
+\section{Réductibilité et déchargement}
+\label{chap:easy}
+
+Nous allons refaire la démonstration de deux propositions voisines de la conjecture étudiée, afin de pouvoir illustrer sur ces deux exemples-ci non-triviaux les méthodes utilisées pour démontrer ce type d'énoncé. Nous introduisons d'abord quelques notions et notation techniques.
 
 Soit $G$ un graphe avec les arêtes coloriées. 
 Considérons le sous-graphe $H^{c_1,c_2}$ de $G$ induit par les arêtes coloriés $c_1$ et $c_2$. Par la définition d'une coloration, aucun sommet de $H^{c_1,c_2}$ ne peut avoir un degré supérieur à 2. Par conséquent, toute composante connexe de $H^{c_1,c_2}$ est une chaîne ou un cycle. Si on choisit une composante connexe $C$ de $H^{c_1,c_2}$, qu'on échange les couleurs $c_1$ et $c_2$ le long de $C$ et qu'on garde la couleur de toutes les autres arêtes, on obtiendra une autre coloration de $G$.
@@ -183,7 +206,7 @@ Nous allons appeler celle-là la \emph{$(c,c_1)$-chaîne de Kempe} de $e$.
 %Cette partie sera consacrée à la présentation des deux propositions qui ont été décrites précédemment. Ces deux propositions vont introduire la conjecture qu'on va traiter après.
 
 \begin{proposition}
-Soit $G$ un graphe planaire avec $\Delta = 5$ et $g \geq 4$. Alors $G$ est $5$-arête-coloriable.
+Soit $G$ un graphe planaire avec $\Delta = 5$ et $g \geq 4$. Alors $\chi'(G)=5$.
 \end{proposition}
 
 Preuve. Supposons que la proposition est fausse. Soit $G$ un contre-exemple minimal, c-à-d un graphe planaire avec $\Delta = 5$ et $g \geq 4$ qui n'est pas $5$-arête-coloriable, mais tout sous-graphe de $G$ l'est.
@@ -523,6 +546,7 @@ Comme on a déjà expliqué dans la parti consacrée à la réductibilité, si o
 
 
 \section{Méthodes}
+\label{chap:meth}
 
 Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
 
